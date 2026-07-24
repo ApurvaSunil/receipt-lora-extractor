@@ -1,7 +1,7 @@
 # Receipt Field Extraction with LoRA
 
-Fine-tuning `Qwen2.5-0.5B-Instruct` with LoRA (PEFT) to pull structured data — vendor, date,
-line items, total — out of raw receipt/OCR-style text and into clean JSON.
+Fine-tuning `Qwen2.5-0.5B-Instruct` with LoRA (PEFT) to pull structured data :vendor, date,
+line items, total : out of raw receipt/OCR-style text and into clean JSON.
 
 ## Why I built this
 
@@ -13,7 +13,7 @@ useful problem to build end to end myself:
 - Wrote my own synthetic receipt generator, with injected noise (missing spaces, character
   swaps, inconsistent currency symbols) instead of using a clean toy dataset
 - Fine-tuned with LoRA
-- Built my own field-level evaluation harness — vendor match, date match, numeric total match,
+- Built my own field-level evaluation harness : vendor match, date match, numeric total match,
   item-list match, valid-JSON rate — instead of just tracking loss
 - Compared the fine-tuned model against the un-tuned base model on the same held-out test set
 
@@ -21,7 +21,7 @@ useful problem to build end to end myself:
 
 | File | What it is |
 |---|---|
-| `receipt_lora_finetuning.ipynb` | The full pipeline — data generation, baseline eval, LoRA fine-tuning, eval, results |
+| `receipt_lora_finetuning.ipynb` | The full pipeline : data generation, baseline eval, LoRA fine-tuning, eval, results |
 | `results.json` | Field-level accuracy, base vs. fine-tuned |
 | `requirements.txt` | Dependencies |
 
@@ -45,7 +45,7 @@ Evaluated on 30 held-out synthetic receipts, exact match per field:
 | **Items exact match** | **0.00** | **1.00** |
 
 The base model was already decent at valid JSON, vendor, date, and total, but got the item
-list wrong on every single example — probably a structural mismatch (e.g. using `"name"`
+list wrong on every single example : probably a structural mismatch (e.g. using `"name"`
 instead of `"item"` as a key) rather than not understanding the receipt at all. Fine-tuning on
 400 examples fixed this completely, bringing every field to 100% on the test set, while only
 training about 0.22% of the model's parameters (1.08M out of 495M).
@@ -56,7 +56,7 @@ test synthetic examples, 3 epochs.
 ## Some notes on the choices I made
 
 - **Qwen2.5-0.5B-Instruct**: small enough to fine-tune on a free Colab GPU quickly, open-weight,
-  already instruction-tuned — so I'm adapting its output behavior with LoRA, not teaching it to
+  already instruction-tuned : so I'm adapting its output behavior with LoRA, not teaching it to
   follow instructions from zero.
 - **Synthetic data**: full control over noise level and difficulty, no dataset licensing to
   worry about, and building the generator was itself a good exercise.
