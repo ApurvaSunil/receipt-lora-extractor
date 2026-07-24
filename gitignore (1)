@@ -1,0 +1,5 @@
+lora-receipt-extractor/
+lora-receipt-extractor-adapter/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
