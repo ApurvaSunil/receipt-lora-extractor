@@ -28,7 +28,7 @@ useful problem to build end to end myself:
 ## How to run it
 
 1. Open `receipt_lora_finetuning.ipynb` in Google Colab
-2. Runtime → Change runtime type → T4 GPU
+2. Runtime should Change runtime type to T4 GPU
 3. Run all cells top to bottom (~20–30 min)
 4. `results.json` gets written at the end
 
