@@ -8,13 +8,13 @@ line items, total : out of raw receipt/OCR-style text and into clean JSON.
 I wanted actual hands-on experience fine-tuning an open-weight model instead of just calling
 an API, so I picked something concrete: turning messy OCR-style text into structured data.
 This comes up a lot in practice (invoices, receipts, expense reports), so it felt like a
-useful problem to build end to end myself:
+useful problem to build end to end:
 
-- Wrote my own synthetic receipt generator, with injected noise (missing spaces, character
+- This consists of synthetic receipt generator, with injected noise (missing spaces, character
   swaps, inconsistent currency symbols) instead of using a clean toy dataset
 - Fine-tuned with LoRA
-- Built my own field-level evaluation harness : vendor match, date match, numeric total match,
-  item-list match, valid-JSON rate — instead of just tracking loss
+- Built field-level evaluation harness : vendor match, date match, numeric total match,
+  item-list match, valid-JSON rate-instead of just tracking loss
 - Compared the fine-tuned model against the un-tuned base model on the same held-out test set
 
 ## What's here
@@ -53,7 +53,7 @@ training about 0.22% of the model's parameters (1.08M out of 495M).
 Config: LoRA rank 8, alpha 16, targeting `q_proj/k_proj/v_proj/o_proj`, 400 train / 60 val / 60
 test synthetic examples, 3 epochs.
 
-## Some notes on the choices I made
+## Some notes 
 
 - **Qwen2.5-0.5B-Instruct**: small enough to fine-tune on a free Colab GPU quickly, open-weight,
   already instruction-tuned : so I'm adapting its output behavior with LoRA, not teaching it to
